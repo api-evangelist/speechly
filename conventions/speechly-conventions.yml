@@ -1,0 +1,58 @@
+generated: '2026-07-21'
+method: derived
+source: grpc/ protobuf definitions
+note: >-
+  Cross-cutting request/response conventions derived from the archived Speechly
+  gRPC definitions. Speechly was a gRPC-first API (with optional HTTP transcoding
+  via google.api.annotations); conventions reflect gRPC semantics rather than
+  REST. The hosted API is discontinued.
+protocol:
+  primary: grpc
+  http_transcoding: true
+  http_transcoding_note: >-
+    speechly/config protos import google/api/annotations.proto, enabling
+    grpc-gateway HTTP/JSON transcoding for the Config surface.
+authentication:
+  style: bearer-token-metadata
+  flow: >-
+    Call IdentityAPI.Login(device_id, scope=application|project) to obtain a
+    short-lived access token, then present it as the gRPC Authorization bearer
+    credential in call metadata on all subsequent SLU/WLU/Batch/Config/
+    Analytics/Moderation calls.
+  cross_ref: authentication/speechly-authentication.yml
+idempotency:
+  supported: false
+  note: >-
+    No idempotency-key mechanism is defined in the protobuf definitions. Config
+    mutations (CreateApp/UpdateApp/DeleteApp) are plain unary RPCs without an
+    idempotency contract.
+pagination:
+  supported: false
+  note: >-
+    ListApps/ListBaseModels/ListLanguages return full repeated collections with
+    no cursor/offset/page-token parameters in the proto definitions.
+streaming:
+  supported: true
+  patterns:
+    - SLU.Stream (bidirectional streaming SLU)
+    - ModerationAPI.StreamingAudioModeration (client streaming audio moderation)
+  note: >-
+    Streaming RPCs carry a leading config message (e.g. SLUConfig) followed by
+    audio chunks; responses interleave transcript, entity, intent and segment
+    events.
+versioning:
+  scheme: package-path
+  note: >-
+    Versions are encoded in the protobuf package path (speechly.slu.v1,
+    speechly.slu.v2beta1, speechly.identity.v2, speechly.moderation.v1beta1).
+  cross_ref: lifecycle/speechly-lifecycle.yml
+error_envelope:
+  style: grpc-status
+  note: >-
+    Errors surface as gRPC status codes/messages. The SLU stream additionally
+    carries an in-band SLUError message for recognition-level failures. No
+    RFC 9457 problem+json envelope is used.
+  cross_ref: conformance/speechly-conformance.yml
+rate_limit_signaling:
+  supported: unknown
+  note: Not documented in the protobuf definitions.

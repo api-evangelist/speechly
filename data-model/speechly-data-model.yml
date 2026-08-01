@@ -1,0 +1,65 @@
+generated: '2026-07-21'
+method: derived
+source: grpc/ protobuf definitions
+note: >-
+  Entity-relationship graph derived from the archived Speechly protobuf message
+  definitions. Speechly organized configuration around Projects that own Apps
+  (trainable SLU models); runtime SLU/Batch/Moderation calls target an App and
+  produce Utterances that Analytics reports on. The hosted API is discontinued;
+  derived from grpc/ for reference.
+entities:
+  - name: Project
+    source: grpc/speechly/config/v1/config_api.proto
+    id_field: id
+    fields: [id, name, participants]
+    description: Top-level container owning apps and project participants.
+  - name: App
+    source: grpc/speechly/config/v1/config_api.proto
+    id_field: id
+    fields: [id, language, status, name, tags, queue_size, deployed_at_time]
+    description: A trainable spoken-language-understanding application within a project.
+  - name: BaseModel
+    source: grpc/speechly/config/v1/model.proto
+    description: A pretrained base model an app can be built on (per language).
+  - name: Utterance
+    source: grpc/speechly/analytics/v1/analytics.proto
+    fields: [transcript, annotated, date]
+    description: A single processed spoken utterance recorded for analytics.
+  - name: AccessToken
+    source: grpc/speechly/identity/v2/identity_api.proto
+    fields: [device_id, scope]
+    description: Short-lived bearer token issued by IdentityAPI.Login, scoped to an application or a project.
+  - name: ModerationLabel
+    source: grpc/speechly/moderation/v1beta1/moderation.proto
+    description: Content-moderation classification produced for audio/text segments.
+relationships:
+  - from: Project
+    to: App
+    kind: has_many
+    via: project
+    source: grpc/speechly/config/v1/config_api.proto
+  - from: App
+    to: Project
+    kind: belongs_to
+    via: project
+    source: grpc/speechly/config/v1/config_api.proto
+  - from: App
+    to: BaseModel
+    kind: belongs_to
+    via: base_model
+    source: grpc/speechly/config/v1/config_api.proto
+  - from: Utterance
+    to: App
+    kind: belongs_to
+    via: app_id
+    source: grpc/speechly/analytics/v1/analytics.proto
+  - from: AccessToken
+    to: App
+    kind: belongs_to
+    via: scope.application
+    source: grpc/speechly/identity/v2/identity.proto
+  - from: AccessToken
+    to: Project
+    kind: belongs_to
+    via: scope.project
+    source: grpc/speechly/identity/v2/identity.proto

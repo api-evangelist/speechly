@@ -1,0 +1,199 @@
+syntax = "proto3";
+
+package speechly.analytics.v1;
+
+option csharp_namespace = "Speechly.Analytics.V1";
+option go_package = "speechly/analytics/v1;analyticsv1";
+option java_multiple_files = true;
+option java_outer_classname = "AnalyticsApiProto";
+option java_package = "com.speechly.analytics.v1";
+option objc_class_prefix = "SAX";
+option php_namespace = "Speechly\\Analytics\\V1";
+
+import "speechly/analytics/v1/analytics.proto";
+
+import "google/protobuf/timestamp.proto";
+
+// Speechly Analytics API contains methods to get accumulated access data
+// for given apps and/or projects.
+service AnalyticsAPI {
+    // Get a summary of utterances for a given time period.
+    rpc UtteranceStatistics(UtteranceStatisticsRequest) returns (UtteranceStatisticsResponse);
+    // Get a sample of recent utterances.
+    rpc Utterances(UtterancesRequest) returns (UtterancesResponse);
+    // Register a data point of an on-device or on-premise utterance.
+    rpc RegisterUtterance(RegisterUtteranceRequest) returns (RegisterUtteranceResponse);
+    // Register multiple utterances in a single request.
+    rpc RegisterUtterances(RegisterUtterancesRequest) returns (RegisterUtterancesResponse);
+
+    // Get moderation event statistics for a project.
+    rpc ModerationStatistics(ModerationStatisticsRequest) returns (ModerationStatisticsResponse);
+    // Get statistics about user behaviour.
+    rpc UserStatistics(UserStatisticsRequest) returns (UserStatisticsResponse);
+}
+
+// Includes keys for the UtteranceStatistics method.
+// If no keys are given, the token's project is used.
+// Token needs to have access to the given app / project.
+message UtteranceStatisticsRequest {
+    // The scope of the returned items.
+    enum Scope {
+        SCOPE_INVALID = 0;
+        // Include only utterance data.
+        SCOPE_UTTERANCES = 1;
+        // Include annotated data.
+        SCOPE_ANNOTATIONS = 2;
+        // Include both utterance and annotated data.
+        SCOPE_ALL = 3;
+    }
+    // Limit statistics to a single app_id.
+    // Default is none, returning statistics for all apps in the project.
+    string app_id = 1;
+    // Amount of days to include in the result.
+    // Default is 14 days.
+    int32 days = 2;
+    // Scope of returned data.
+    // Default is UTTERANCES.
+    Scope scope = 3;
+    // Aggregation of the data.
+    // Default is DAILY
+    Aggregation aggregation = 4;
+    // Start of requested statistics period.
+    // Default is 15 days ago.
+    // Must be YYYY-mm-DD formatted string if given.
+    string start_date = 5;
+    // End of requested statistics period.
+    // Default is 1 day ago, resulting in two full weeks.
+    // Must be YYYY-mm-DD formatted string if given.
+    string end_date = 6;
+    // Limit statisticts to a single project_id
+    // Default is none, returning statistics for the project in the given scope.
+    string project_id = 7;
+}
+
+// Contains a list of statistics entries for utterances, based on the requested
+// scope.
+message UtteranceStatisticsResponse {
+    // Start of this statistics period.
+    // YYYY-mm-DD formatted string.
+    string start_date = 1;
+    // End of this statistics period.
+    // YYYY-mm-DD formatted string.
+    string end_date = 2;
+    // Time period length.
+    Aggregation aggregation = 3;
+    // Aggregated results.
+    repeated UtteranceStatisticsPeriod items = 4;
+    // Amount of utterances in this response
+    int32 total_utterances = 5;
+    // Total duration of utterances in seconds.
+    int32 total_duration_seconds = 6;
+    // Total duration of annotated utterances in seconds.
+    int32 total_annotated_seconds = 7;
+}
+
+message UtterancesRequest {
+    // The app_id to show the utterances for.
+    string app_id = 1;
+}
+
+message UtterancesResponse {
+    // Sample of utterances.
+    repeated Utterance utterances = 1;
+}
+
+// A single data point of an utterance recognized by Speechly On Device or Speechly On Premise.
+message RegisterUtteranceRequest {
+    // id of the application the operation belongs to
+    string app_id = 1;
+    // device_id of the utterance.
+    string device_id = 2;
+    // Length of the recognized utterance in seconds.
+    int32 utterance_length_seconds = 3;
+    // Length of the recognized utterance in characters.
+    int32 utterance_length_chars = 4;
+    // Information about the on-device decoder.
+    DecoderInfo decoder_info = 5;
+    // When the processing was initially requested.
+    google.protobuf.Timestamp created_time = 6;
+    // When the processing was finished.
+    google.protobuf.Timestamp finished_time = 7;
+    // The status of the processing.
+    enum Status {
+        // Default status is empty
+        STATUS_INVALID = 0;
+        // Processing completed successfully.
+        STATUS_SUCCESS = 1;
+        // The processing failed.
+        STATUS_ERROR = 2;
+    }
+    // The status of the processing.
+    Status status = 8;
+    // batch api operation id of the utterance
+    string operation_id = 9;
+    // id of the batch the operation belongs to
+    string batch_id = 10;
+    // id of the project the operation belongs to
+    string project_id = 11;
+    // language of the utterance (BCP-47)
+    string language = 12;
+    // Information about the processing applied to the utterance
+    ProcessingInfo processing_info = 13;
+}
+
+// Default empty response.
+message RegisterUtteranceResponse {}
+
+// Register multiple utterances in the same request.
+message RegisterUtterancesRequest { repeated RegisterUtteranceRequest requests = 1; }
+
+message RegisterUtterancesResponse {}
+
+// Request time series statistics about moderation events.
+message ModerationStatisticsRequest {
+    // the project to return statistics for.
+    // Required when there are multiple projects to choose from.
+    string project_id = 1;
+    // Limit statistics to a single app_id.
+    // Default is none, returning statistics for the project in scope.
+    string app_id = 2;
+    // Start of requested statistics period.
+    // Default is 15 days ago.
+    // Must be YYYY-mm-DD formatted string if given.
+    string start_date = 3;
+    // End of requested statistics period.
+    // Default is 1 day ago, resulting in two full weeks.
+    // Must be YYYY-mm-DD formatted string if given.
+    string end_date = 4;
+    // Aggregation of the data.
+    // Default is DAILY
+    Aggregation aggregation = 5;
+}
+
+// Contains the time series data for moderation events.
+message ModerationStatisticsResponse {
+    string project_id = 1;
+    string app_id = 2;
+    // Start of this statistics period.
+    // YYYY-mm-DD formatted string.
+    string start_date = 3;
+    // End of this statistics period.
+    // YYYY-mm-DD formatted string.
+    string end_date = 4;
+    // Time period length.
+    Aggregation aggregation = 5;
+    // Aggregated results.
+    repeated ModerationStatisticsPeriod items = 6;
+    // Total number of events in this response.
+    int32 total_events = 7;
+    // Total number of flagged events in this response.
+    int32 total_flagged = 8;
+    // Total number of non-flagged (OK) events in this response.
+    int32 total_not_flagged = 9;
+}
+
+// Request for getting user statistics.
+message UserStatisticsRequest {}
+
+// Contains the user statistics requested.
+message UserStatisticsResponse {}

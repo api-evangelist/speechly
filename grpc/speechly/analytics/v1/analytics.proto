@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+package speechly.analytics.v1;
+
+option csharp_namespace = "Speechly.Analytics.V1";
+option go_package = "speechly/analytics/v1;analyticsv1";
+option java_multiple_files = true;
+option java_outer_classname = "AnalyticsProto";
+option java_package = "com.speechly.analytics.v1";
+option objc_class_prefix = "SAX";
+option php_namespace = "Speechly\\Analytics\\V1";
+
+// Aggregation granularity.
+enum Aggregation {
+    AGGREGATION_INVALID = 0;
+    AGGREGATION_MONTHLY = 1;
+    AGGREGATION_DAILY = 2;
+    AGGREGATION_HOURLY = 3;
+}
+
+// Single row of statistics response.
+message UtteranceStatisticsPeriod {
+    // app_id or empty, if aggregating over project.
+    string app_id = 2;
+    // ISO-formatted UTC timestamp of the start time of the period.
+    string start_time = 3;
+    // Count (sum) of utterances in the current period.
+    int32 count = 4;
+    // Total duration of the utterances in the current period.
+    int32 utterances_seconds = 5;
+    // Total duration of annotated utterances in the current period.
+    int32 annotated_seconds = 6;
+    // project_id or empty, if specifying a project.
+    string project_id = 7;
+    // the id of the model used, if applicable.
+    string model_id = 8;
+}
+
+// A single utterances recognized by Speechly API.
+message Utterance {
+    // The ASR transcript of the utterance.
+    string transcript = 1;
+    // The SAL-annotated transcript of the utterance.
+    string annotated = 2;
+    // ISO-formatted UTC date of the utterance.
+    string date = 3;
+}
+
+// Information about the on-device decoder.
+message DecoderInfo {
+    // Version of the Speechly on-device decoder.
+    string version = 1;
+    // Number of utterances the decoder has transcribed.
+    int32 utterance_count = 2;
+    // Cumulative sum of the utterance length in seconds for the decoder.
+    int32 total_seconds_transcribed = 3;
+}
+
+// The various types of processing that can be applied to the audio.
+enum ProcessingType {
+    PROCESSING_TYPE_INVALID = 0;
+    PROCESSING_TYPE_TRANSCRIPTION = 1;
+    PROCESSING_TYPE_NLU = 2;
+    PROCESSING_TYPE_LANGUAGE_DETECTION = 3;
+    PROCESSING_TYPE_VAD = 4;
+    PROCESSING_TYPE_TRANSLATION = 5;
+    PROCESSING_TYPE_AUDIO_EVENT_DETECTION = 6;
+    PROCESSING_TYPE_TONE_OF_VOICE_LABELLING = 7;
+    PROCESSING_TYPE_SHALLOW_FUSION = 8;
+}
+
+// Specifies what processing has been applied to an utterance.
+message ProcessingInfo {
+    // The processing types that were applied
+    repeated ProcessingType processing_types = 1;
+    // id of the model that was used for processing
+    string model_id = 2;
+}
+
+// A single time series entry for moderation statistics.
+message ModerationStatisticsPeriod {
+    // period start time
+    string start_time = 1;
+    // if grouping by users, the user id, or "OTHER"
+    string user_id = 2;
+    // total amount of moderation events for this period.
+    int32 count = 3;
+    // total amount of flagged events.
+    int32 flagged = 4;
+    // total amount of not flagged (OK) events for this period.
+    int32 not_flagged = 5;
+    // amount of moderation decisions made.
+    int32 decisions = 6;
+}
+
+// A single time series entry for user statistics.
+message UserStatisticsPeriod {
+    string start_time = 1;
+    int32 active_users = 2;
+    int32 toxic_users = 3;
+    int32 exposed_users = 4;
+}

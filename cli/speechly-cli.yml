@@ -1,0 +1,34 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/speechly/cli (archived)
+name: speechly
+description: >-
+  The Speechly Command Line Interface manages Speechly projects and
+  applications: create/deploy new application versions, download configurations,
+  and evaluate recognition accuracy. Last release v0.11.8 (2023-03-16); the repo
+  is part of the archived github.com/speechly organization.
+repo: https://github.com/speechly/cli
+language: go
+latest_release: v0.11.8
+install:
+  - method: homebrew
+    commands:
+      - brew tap speechly/tap
+      - brew install speechly
+  - method: scoop
+    commands:
+      - scoop bucket add speechly https://github.com/speechly/scoop-bucket
+      - scoop install speechly
+commands:
+  - name: create
+    description: Create a new application in the current project.
+  - name: deploy
+    description: Deploy a new version of an application configuration.
+  - name: download
+    description: Download the configuration of an application.
+  - name: evaluate
+    description: Evaluate recognition/accuracy of a deployed model.
+  - name: projects
+    description: Manage and switch between Speechly projects.
+  - name: config
+    description: Manage CLI configuration and API access.

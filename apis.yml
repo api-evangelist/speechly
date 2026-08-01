@@ -1,7 +1,30 @@
 aid: speechly
 name: Speechly
-description: Speechly is a company surfaced as a portfolio company of seedcamp and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Speechly was a real-time spoken language understanding (SLU) and streaming
+  speech recognition platform from a Finnish startup, offering low-latency voice
+  transcription, intent/entity parsing, written language understanding (WLU),
+  batch audio processing, and audio/text moderation through a gRPC API with
+  browser, React, iOS, Unity/.NET, Python and Go client SDKs and a command-line
+  interface. Speechly was acquired by Roblox; the standalone product and hosted
+  API have since been discontinued — speechly.com now redirects to roblox.com,
+  the api.speechly.com and docs.speechly.com hosts no longer resolve, and the
+  github.com/speechly organization was archived on 2025-01-07. Its open-source
+  client SDKs and protobuf/gRPC API definitions remain publicly available and are
+  cataloged here by the API Evangelist enrichment pipeline.
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://avatars.githubusercontent.com/u/25465412?v=4
 url: https://raw.githubusercontent.com/api-evangelist/speechly/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -9,12 +32,39 @@ x-backed-by:
 - seedcamp
 x-tier: stub
 x-tier-reason: portfolio-lead
+x-status: discontinued
+x-acquired-by: roblox
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-apis: []
+- Speech Recognition
+- Voice
+- Spoken Language Understanding
+- Speech-to-Text
+- Content Moderation
+- Machine Learning
+- gRPC
+- Artificial Intelligence
+apis:
+- name: Speechly API
+  description: >-
+    Speechly's gRPC API surface: Identity (access tokens), SLU (streaming spoken
+    language understanding), WLU (written language understanding), Batch audio
+    processing, Config/Model management, Analytics, and audio/text Moderation.
+    The hosted service has been discontinued; protobuf definitions are retained
+    verbatim under grpc/.
+  humanURL: https://github.com/speechly/api
+  baseURL: https://api.speechly.com
+  x-status: discontinued
+  properties:
+  - type: Protobuf
+    url: grpc/_index.yml
+  - type: Authentication
+    url: authentication/speechly-authentication.yml
+  - type: Conformance
+    url: conformance/speechly-conformance.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -23,3 +73,36 @@ maintainers:
 common:
 - type: Website
   url: http://speechly.com
+- type: GitHubOrganization
+  url: https://github.com/speechly
+- type: SourceCode
+  url: https://github.com/speechly/api
+- type: Packages
+  url: packages/speechly-packages.yml
+- type: SDKs
+  url: packages/speechly-packages.yml
+- type: CLI
+  url: cli/speechly-cli.yml
+- type: Protobuf
+  url: grpc/_index.yml
+- type: Authentication
+  url: authentication/speechly-authentication.yml
+- type: Conformance
+  url: conformance/speechly-conformance.yml
+- type: Lifecycle
+  url: lifecycle/speechly-lifecycle.yml
+- type: DomainSecurity
+  url: security/speechly-domain-security.yml
+- type: LLMsTxt
+  url: llms/speechly-llms.txt
+- type: MCPServer
+  url: mcp/speechly-mcp.yml
+- type: DataModel
+  url: data-model/speechly-data-model.yml
+- type: Conventions
+  url: conventions/speechly-conventions.yml
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 3
+  pass: local-v1

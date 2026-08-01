@@ -1,0 +1,47 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/speechly/api/tree/master/proto (archived)
+note: >-
+  Verbatim first-party protobuf/gRPC definitions for the Speechly public APIs.
+  Preserved directory structure keeps imports valid. The hosted API (formerly
+  api.speechly.com) has been discontinued following the Roblox acquisition;
+  these definitions are retained for reference.
+services:
+  - service: IdentityAPI
+    package: speechly.identity.v2
+    file: speechly/identity/v2/identity_api.proto
+    rpcs: [Login]
+  - service: SLU
+    package: speechly.slu.v1
+    file: speechly/slu/v1/slu.proto
+    rpcs: [Stream]
+    note: Bidirectional streaming spoken language understanding.
+  - service: WLU
+    package: speechly.slu.v1
+    file: speechly/slu/v1/wlu.proto
+    rpcs: [Text, Texts]
+  - service: BatchAPI
+    package: speechly.slu.v1
+    file: speechly/slu/v1/batch_api.proto
+    rpcs: [ProcessAudio, QueryStatus]
+    note: Also versions v2, v2beta1, v2beta2 (ProcessAudioSource, QueryStatus).
+  - service: ConfigAPI
+    package: speechly.config.v1
+    file: speechly/config/v1/config_api.proto
+    rpcs: [GetProject, CreateProject, UpdateProject, GetProjectParticipants, Invite, JoinProject, ListApps, GetApp, CreateApp, UpdateApp, DeleteApp, UploadTrainingData, DownloadCurrentTrainingData]
+  - service: ModelAPI
+    package: speechly.config.v1
+    file: speechly/config/v1/model_api.proto
+    rpcs: [DownloadModel, ListBaseModels, ListLanguages]
+  - service: AnalyticsAPI
+    package: speechly.analytics.v1
+    file: speechly/analytics/v1/analytics_api.proto
+    rpcs: [UtteranceStatistics, Utterances, RegisterUtterance, RegisterUtterances, ModerationStatistics, UserStatistics]
+  - service: ModerationAPI
+    package: speechly.moderation.v1beta1
+    file: speechly/moderation/v1beta1/moderation_api.proto
+    rpcs: [AudioModeration, StreamingAudioModeration, TextModeration]
+  - service: Compiler
+    package: speechly.sal.v1
+    file: speechly/sal/v1/compiler.proto
+    rpcs: [Compile, Validate, ExtractSALSources, Convert]

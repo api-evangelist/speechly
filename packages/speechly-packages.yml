@@ -1,0 +1,72 @@
+generated: '2026-07-21'
+method: searched
+source: npm registry, PyPI, Go module proxy, NuGet + github.com/speechly (archived org)
+note: >-
+  Speechly was acquired by Roblox and the hosted API was discontinued; these
+  first-party open-source client libraries remain published on the public
+  registries and in the archived github.com/speechly organization.
+packages:
+  - language: javascript
+    registry: npm
+    name: "@speechly/browser-client"
+    version: 2.6.6
+    url: https://www.npmjs.com/package/@speechly/browser-client
+    repo: https://github.com/speechly/speechly
+    install: npm install @speechly/browser-client
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@speechly/react-client"
+    version: 2.2.4
+    url: https://www.npmjs.com/package/@speechly/react-client
+    repo: https://github.com/speechly/speechly
+    install: npm install @speechly/react-client
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@speechly/react-ui"
+    version: 2.7.5
+    url: https://www.npmjs.com/package/@speechly/react-ui
+    repo: https://github.com/speechly/ui-components
+    install: npm install @speechly/react-ui
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@speechly/browser-ui"
+    version: 6.0.6
+    url: https://www.npmjs.com/package/@speechly/browser-ui
+    repo: https://github.com/speechly/ui-components
+    install: npm install @speechly/browser-ui
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@speechly/speech-recognition-polyfill"
+    version: 1.3.0
+    url: https://www.npmjs.com/package/@speechly/speech-recognition-polyfill
+    repo: https://github.com/speechly/speech-recognition-polyfill
+    install: npm install @speechly/speech-recognition-polyfill
+    official: true
+  - language: python
+    registry: pypi
+    name: speechly-api
+    version: 0.10.4
+    url: https://pypi.org/project/speechly-api/
+    repo: https://github.com/speechly/api
+    install: pip install speechly-api
+    official: true
+  - language: go
+    registry: pkg.go.dev
+    name: github.com/speechly/api/go
+    version: v0.0.0-20231012071019-260d154da182
+    url: https://pkg.go.dev/github.com/speechly/api/go
+    repo: https://github.com/speechly/api
+    install: go get github.com/speechly/api/go
+    official: true
+  - language: dotnet
+    registry: nuget
+    name: SpeechlyApi
+    version: 0.7.0
+    url: https://www.nuget.org/packages/SpeechlyApi
+    repo: https://github.com/speechly/speechly-unity-dotnet
+    install: dotnet add package SpeechlyApi
+    official: true

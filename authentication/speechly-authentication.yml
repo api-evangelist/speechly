@@ -1,0 +1,23 @@
+generated: '2026-07-21'
+method: derived
+source: grpc/speechly/identity/v2/identity_api.proto
+note: >-
+  Speechly used a two-step gRPC auth model: exchange an application/project
+  identifier plus device id for a short-lived bearer access token via the
+  Identity API, then present the token as gRPC metadata on subsequent calls.
+  Derived from the archived protobuf definitions; the hosted API is discontinued.
+summary:
+  types: [oauth2-like, bearer]
+  token_endpoint: speechly.identity.v2.IdentityAPI/Login
+schemes:
+  - name: identityLogin
+    type: token-exchange
+    scheme: bearer
+    description: >-
+      IdentityAPI.Login(LoginRequest{device_id, scope: application|project})
+      returns a LoginResponse access token used as the gRPC Authorization
+      bearer credential for SLU, WLU, Batch, Config, Analytics and Moderation
+      services.
+    sources:
+      - grpc/speechly/identity/v2/identity_api.proto
+      - grpc/speechly/identity/v1/identity.proto

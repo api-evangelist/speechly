@@ -1,0 +1,27 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/speechly (archived org), https://speechly.com (301 -> roblox.com)
+status: discontinued
+summary: >-
+  Speechly was acquired by Roblox. The standalone Speechly product and hosted
+  API were subsequently discontinued: speechly.com now 301-redirects to
+  roblox.com, the api.speechly.com and docs.speechly.com hosts no longer resolve,
+  and the github.com/speechly organization was archived on 2025-01-07 ("no longer
+  maintained"). Open-source client SDKs and protobuf definitions remain published.
+versioning:
+  scheme: package-path
+  services:
+    - speechly.identity v1, v2
+    - speechly.slu v1, v2, v2beta1, v2beta2
+    - speechly.config v1
+    - speechly.analytics v1
+    - speechly.moderation v1beta1
+    - speechly.sal v1
+milestones:
+  - date: '2025-01-07'
+    event: github.com/speechly organization archived (no longer maintained)
+  - event: acquired by Roblox; hosted API discontinued; speechly.com redirects to roblox.com
+status_page: null
+deprecation:
+  policy_url: null
+  note: entire hosted API sunset following acquisition; no formal deprecation window published
