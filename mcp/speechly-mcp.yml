@@ -2,67 +2,71 @@ generated: '2026-07-21'
 method: derived
 status: candidate
 source: grpc/_index.yml (archived Speechly protobuf definitions)
-note: >-
-  Candidate MCP tool list derived one-per-RPC from the archived Speechly gRPC
-  service definitions. No official Speechly MCP server exists and the hosted API
-  (formerly api.speechly.com) has been discontinued following the Roblox
-  acquisition, so this is a reference mapping only — the server is not
-  deployable. Streaming RPCs (SLU.Stream, StreamingAudioModeration) do not map
-  cleanly to request/response MCP tools and are marked streaming.
+note: Candidate MCP tool list derived one-per-RPC from the archived Speechly gRPC service definitions.
+  No official Speechly MCP server exists and the hosted API (formerly api.speechly.com) has been discontinued
+  following the Roblox acquisition, so this is a reference mapping only — the server is not deployable.
+  Streaming RPCs (SLU.Stream, StreamingAudioModeration) do not map cleanly to request/response MCP tools
+  and are marked streaming.
 server:
   name: speechly
   transport: grpc
   url: null
 tools:
-  - name: login
-    description: Exchange a device id + application/project scope for a bearer access token.
-    source_operation: grpc/speechly/identity/v2/identity_api.proto#IdentityAPI/Login
-  - name: stream_slu
-    description: Bidirectional streaming spoken language understanding (transcript + intents/entities).
-    streaming: true
-    source_operation: grpc/speechly/slu/v1/slu.proto#SLU/Stream
-  - name: text_wlu
-    description: Written language understanding over a single text input.
-    source_operation: grpc/speechly/slu/v1/wlu.proto#WLU/Text
-  - name: texts_wlu
-    description: Written language understanding over multiple text inputs.
-    source_operation: grpc/speechly/slu/v1/wlu.proto#WLU/Texts
-  - name: process_audio
-    description: Submit an audio file for batch SLU processing.
-    source_operation: grpc/speechly/slu/v1/batch_api.proto#BatchAPI/ProcessAudio
-  - name: query_batch_status
-    description: Query the status/results of a batch audio processing job.
-    source_operation: grpc/speechly/slu/v1/batch_api.proto#BatchAPI/QueryStatus
-  - name: list_apps
-    description: List the applications in a project.
-    source_operation: grpc/speechly/config/v1/config_api.proto#ConfigAPI/ListApps
-  - name: get_app
-    description: Fetch a single application by id.
-    source_operation: grpc/speechly/config/v1/config_api.proto#ConfigAPI/GetApp
-  - name: create_app
-    description: Create a new application in a project.
-    source_operation: grpc/speechly/config/v1/config_api.proto#ConfigAPI/CreateApp
-  - name: update_app
-    description: Update an application's configuration.
-    source_operation: grpc/speechly/config/v1/config_api.proto#ConfigAPI/UpdateApp
-  - name: delete_app
-    description: Delete an application.
-    source_operation: grpc/speechly/config/v1/config_api.proto#ConfigAPI/DeleteApp
-  - name: upload_training_data
-    description: Upload training data for an application.
-    source_operation: grpc/speechly/config/v1/config_api.proto#ConfigAPI/UploadTrainingData
-  - name: list_base_models
-    description: List available base models to build apps on.
-    source_operation: grpc/speechly/config/v1/model_api.proto#ModelAPI/ListBaseModels
-  - name: utterance_statistics
-    description: Retrieve aggregate utterance analytics for a period.
-    source_operation: grpc/speechly/analytics/v1/analytics_api.proto#AnalyticsAPI/UtteranceStatistics
-  - name: audio_moderation
-    description: Moderate an audio input for policy-violating content.
-    source_operation: grpc/speechly/moderation/v1beta1/moderation_api.proto#ModerationAPI/AudioModeration
-  - name: text_moderation
-    description: Moderate a text input for policy-violating content.
-    source_operation: grpc/speechly/moderation/v1beta1/moderation_api.proto#ModerationAPI/TextModeration
-  - name: compile_sal
-    description: Compile a SAL (Speechly Annotation Language) configuration.
-    source_operation: grpc/speechly/sal/v1/compiler.proto#Compiler/Compile
+- name: login
+  description: Exchange a device id + application/project scope for a bearer access token.
+  source_operation: grpc/speechly/identity/v2/identity_api.proto#IdentityAPI/Login
+- name: stream_slu
+  description: Bidirectional streaming spoken language understanding (transcript + intents/entities).
+  streaming: true
+  source_operation: grpc/speechly/slu/v1/slu.proto#SLU/Stream
+- name: text_wlu
+  description: Written language understanding over a single text input.
+  source_operation: grpc/speechly/slu/v1/wlu.proto#WLU/Text
+- name: texts_wlu
+  description: Written language understanding over multiple text inputs.
+  source_operation: grpc/speechly/slu/v1/wlu.proto#WLU/Texts
+- name: process_audio
+  description: Submit an audio file for batch SLU processing.
+  source_operation: grpc/speechly/slu/v1/batch_api.proto#BatchAPI/ProcessAudio
+- name: query_batch_status
+  description: Query the status/results of a batch audio processing job.
+  source_operation: grpc/speechly/slu/v1/batch_api.proto#BatchAPI/QueryStatus
+- name: list_apps
+  description: List the applications in a project.
+  source_operation: grpc/speechly/config/v1/config_api.proto#ConfigAPI/ListApps
+- name: get_app
+  description: Fetch a single application by id.
+  source_operation: grpc/speechly/config/v1/config_api.proto#ConfigAPI/GetApp
+- name: create_app
+  description: Create a new application in a project.
+  source_operation: grpc/speechly/config/v1/config_api.proto#ConfigAPI/CreateApp
+- name: update_app
+  description: Update an application's configuration.
+  source_operation: grpc/speechly/config/v1/config_api.proto#ConfigAPI/UpdateApp
+- name: delete_app
+  description: Delete an application.
+  source_operation: grpc/speechly/config/v1/config_api.proto#ConfigAPI/DeleteApp
+- name: upload_training_data
+  description: Upload training data for an application.
+  source_operation: grpc/speechly/config/v1/config_api.proto#ConfigAPI/UploadTrainingData
+- name: list_base_models
+  description: List available base models to build apps on.
+  source_operation: grpc/speechly/config/v1/model_api.proto#ModelAPI/ListBaseModels
+- name: utterance_statistics
+  description: Retrieve aggregate utterance analytics for a period.
+  source_operation: grpc/speechly/analytics/v1/analytics_api.proto#AnalyticsAPI/UtteranceStatistics
+- name: audio_moderation
+  description: Moderate an audio input for policy-violating content.
+  source_operation: grpc/speechly/moderation/v1beta1/moderation_api.proto#ModerationAPI/AudioModeration
+- name: text_moderation
+  description: Moderate a text input for policy-violating content.
+  source_operation: grpc/speechly/moderation/v1beta1/moderation_api.proto#ModerationAPI/TextModeration
+- name: compile_sal
+  description: Compile a SAL (Speechly Annotation Language) configuration.
+  source_operation: grpc/speechly/sal/v1/compiler.proto#Compiler/Compile
+deployment:
+  mode: none
+  verified: derived
+  tools: 17
+  checked: '2026-08-12'
+  source: catalog MCP census
