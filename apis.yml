@@ -34,6 +34,7 @@ accessModel:
   confidence: low
   source:
   - authentication
+  - {url: 'http://speechly.com', status: 301, note: 'declared website redirects to https://www.roblox.com:443/ — a different registrable domain (speechly.com -> roblox.com), possible rename or acquisition (probed 2026-09-03, roadmap#169)'}
   generated: '2026-07-22'
   method: derived
 image: https://avatars.githubusercontent.com/u/25465412?v=4
@@ -129,8 +130,9 @@ common:
   url: security/speechly-domain-security.yml
 - type: LLMsTxt
   url: llms/speechly-llms.txt
-- type: MCPServer
+- type: X-MCPServerCandidate
   url: mcp/speechly-mcp.yml
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
 - type: DataModel
   url: data-model/speechly-data-model.yml
 - type: Conventions
