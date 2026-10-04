@@ -57,7 +57,7 @@ tags:
 - Spoken Language Understanding
 - Speech-to-Text
 - Content Moderation
-- Machine-Learning
+- Machine Learning
 - gRPC
 - Artificial Intelligence
 tags_raw:
@@ -70,6 +70,7 @@ tags_raw:
 - Machine Learning
 - gRPC
 - Artificial Intelligence
+- Machine-Learning
 apis:
 - name: Speechly API
   description: >-
