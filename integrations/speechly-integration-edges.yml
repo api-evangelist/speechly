@@ -1,0 +1,106 @@
+edges:
+- partner_name: Go module proxy
+  partner: null
+  partner_match: null
+  type: register
+  direction: provider-built
+  category: official SDK (Go)
+  evidence: https://pkg.go.dev/github.com/speechly/api/go
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: Go module proxy (public registry JSON)
+    spec_file: null
+    language: Go
+    packages:
+    - name: github.com/speechly/api/go
+      version: v0.0.0-20231012071019-260d154da182
+      released: '2023-10-12'
+      released_field: Time
+      lapsed: true
+      page: https://pkg.go.dev/github.com/speechly/api/go
+      repo_leg: github-org:speechly
+      publisher_leg: org:speechly
+      matched_by: github-org
+    current: false
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
+- partner_name: npm registry
+  partner: npm
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (JavaScript/TypeScript)
+  evidence: https://www.npmjs.com/package/@speechly/browser-client
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@speechly/browser-client'
+      version: 2.6.6
+      released: '2023-09-06'
+      released_field: modified
+      lapsed: true
+      page: https://www.npmjs.com/package/@speechly/browser-client
+      repo_leg: github-org:speechly
+      publisher_leg: email:speechly.com
+      matched_by: domain
+    - name: '@speechly/browser-ui'
+      version: 6.0.6
+      released: '2023-02-27'
+      released_field: modified
+      lapsed: true
+      page: https://www.npmjs.com/package/@speechly/browser-ui
+      repo_leg: github-org:speechly
+      publisher_leg: email:speechly.com
+      matched_by: domain
+    - name: '@speechly/react-client'
+      version: 2.2.4
+      released: '2023-05-09'
+      released_field: modified
+      lapsed: true
+      page: https://www.npmjs.com/package/@speechly/react-client
+      repo_leg: github-org:speechly
+      publisher_leg: email:speechly.com
+      matched_by: domain
+    - name: '@speechly/react-ui'
+      version: 2.7.5
+      released: '2023-03-27'
+      released_field: modified
+      lapsed: true
+      page: https://www.npmjs.com/package/@speechly/react-ui
+      repo_leg: github-org:speechly
+      publisher_leg: email:speechly.com
+      matched_by: domain
+    current: false
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
+generated: '2026-10-18'
+method: searched
+source:
+- https://api.nuget.org/v3
+- https://crates.io/api/v1
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
+checked:
+- https://api.nuget.org/v3
+- https://crates.io/api/v1
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
